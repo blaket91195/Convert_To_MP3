@@ -3,10 +3,13 @@ import os
 from pathlib import Path
 
 try:
-    from moviepy.editor import VideoFileClip
+    from moviepy import VideoFileClip  # moviepy 2.x
 except ImportError:
-    print("Error: moviepy is not installed. Run: pip install moviepy")
-    sys.exit(1)
+    try:
+        from moviepy.editor import VideoFileClip  # moviepy 1.x fallback
+    except ImportError:
+        print("Error: moviepy is not installed. Run: pip install moviepy")
+        sys.exit(1)
 
 
 def convert_file(input_path, output_path=None):
